@@ -1,0 +1,9 @@
+﻿@model int
+@{
+    ViewBag.Title = "Završetak rezervacije";
+}
+<h2>@ViewBag.Title</h2>
+<p>Zahvaljujemo Vam se na Vašem zahtjevu, očekujte uskoro odgovor putem emaila! Broj Vaše rezervacije je: @Model</p>
+<p>
+    @Html.ActionLink("Pregled opreme", "Index", "Oprema")
+</p>

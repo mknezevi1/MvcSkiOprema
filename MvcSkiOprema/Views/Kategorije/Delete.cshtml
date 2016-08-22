@@ -1,0 +1,25 @@
+﻿@model MvcSkiOprema.Models.Kategorija
+
+@{
+    ViewBag.Title = "Brisanje kategorije";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Jeste li sigurni da želite pobrisati ovu kategoriju?</h3>
+<fieldset>
+    <legend>Kategorija</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Pobriši" /> |
+        @Html.ActionLink("Povratak", "Index")
+    </p>
+}

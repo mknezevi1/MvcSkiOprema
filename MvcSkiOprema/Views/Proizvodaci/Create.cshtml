@@ -1,0 +1,35 @@
+﻿@model MvcSkiOprema.Models.Proizvodac
+
+@{
+    ViewBag.Title = "Kreiranje proizvođača";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Proizvodac</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Naziv)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Naziv)
+            @Html.ValidationMessageFor(model => model.Naziv)
+        </div>
+
+        <p>
+            <input type="submit" value="Spremi" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Povratak", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

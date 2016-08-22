@@ -1,0 +1,110 @@
+﻿@model IEnumerable<MvcSkiOprema.Models.Oprema>
+
+@{
+    ViewBag.Title = "Lista opreme";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+            </hgroup>
+        </div>
+    </section>
+}
+
+<div class="float-left">
+    <nav>
+        <ul id="menu">
+            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+            {
+                <li>@Html.ActionLink("Kategorije", "Index", "Kategorije")</li>
+                <li>@Html.ActionLink("Proizvodači", "Index", "Proizvodaci")</li>
+                <li>@Html.ActionLink("Oprema", "Index", "Oprema")</li>
+                <li>@Html.ActionLink("Rezervacije", "Index", "Rezervacije")</li>
+            }
+
+            <li>@Html.ActionLink("Košarica", "Index", "ShoppingCart")</li>
+        </ul>
+    </nav>
+    <hr />
+</div>
+<br />
+<br />
+
+<p>
+    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+    { 
+        @Html.ActionLink("Novo", "Create")
+    }
+</p>
+
+<form action="/Oprema/Search" method="get">
+    <input type="text" name="q" />
+    <input type="submit" name="pretrazi" value="Pretraži" />
+    <input type="submit" name="ocisti" value="Očisti filter" />
+</form>
+*vrijednost koju unesete se pretražuje po parametrima: model, proizvođač i kategorija
+
+<table>
+    <tr>
+        <th>
+            Model
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cijena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Godina)
+        </th>
+        <th>
+            Kategorija
+        </th>
+        <th>
+            Proizvođač
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Velicina)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Godina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategorija.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proizvodac.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Velicina)
+            </td>
+            <td>
+                @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Ažuriraj", "Edit", new { id = item.Id }) 
+                    @Html.ActionLink("Pobriši", "Delete", new { id = item.Id })
+                }
+                @Html.ActionLink("Detalji", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

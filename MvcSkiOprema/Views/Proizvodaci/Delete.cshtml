@@ -1,0 +1,25 @@
+﻿@model MvcSkiOprema.Models.Proizvodac
+
+@{
+    ViewBag.Title = "Brisanje proizvođača";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Jeste li sigurni da želite pobrisati ovog proizvođača?</h3>
+<fieldset>
+    <legend>Proizvodac</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Pobriši" /> |
+        @Html.ActionLink("Povratak", "Index")
+    </p>
+}

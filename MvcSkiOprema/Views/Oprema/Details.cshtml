@@ -1,0 +1,59 @@
+﻿@model MvcSkiOprema.Models.Oprema
+
+@{
+    ViewBag.Title = "Detalji opreme";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Oprema</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Proizvodac.Naziv) @Html.DisplayFor(model => model.Naziv) 
+    </div><br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Opis)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Opis)
+    </div><br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Cijena): <span style="font-weight:normal;">@Html.DisplayFor(model => model.Cijena) kn/dan</span>
+    </div><br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Godina): <span style="font-weight:normal;">@Html.DisplayFor(model => model.Godina)</span>
+    </div><br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Velicina): <span style="font-weight:normal;">@Html.DisplayFor(model => model.Velicina)</span>
+    </div><br />
+
+    @if (Model.Slika == null)
+    { 
+        <img alt="slika" src="~/Images/Oprema/noPhoto.png" />
+    }
+    else
+    {
+        <img alt="slika" src="~/Images/Oprema/@Model.Slika" />
+    }
+</fieldset>
+<p>
+    @Html.ActionLink("Povratak", "Index")
+
+    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Ažuriraj", "Edit", new { id = Model.Id }) 
+    }
+
+    @if (Request.IsAuthenticated)
+    { 
+        @Html.ActionLink("Dodaj", "AddToCart", "ShoppingCart", new { id = Model.Id }, "")
+    }
+</p>

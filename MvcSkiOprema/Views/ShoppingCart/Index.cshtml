@@ -1,0 +1,74 @@
+﻿@model MvcSkiOprema.ViewModels.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Košarica";
+}
+<script src="/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        $('#row-' + data.DeleteId).fadeOut('slow');
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>
+<p class="button">
+    @Html.ActionLink("<<Pregled opreme", "Index", "Oprema")
+    @Html.ActionLink("Rezerviraj>>", "KreiranjeRezervacije", "Checkout")
+</p>
+<div id="update-message">
+</div>
+<table>
+    <tr>
+        <th>ID 
+        </th>
+        <th>Proizvođač
+        </th>
+        <th>Model
+        </th>
+        <th>Cijena/dan
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.OpremaId">
+            <td>
+                @item.Oprema.Id
+            </td>
+            <td>
+                @item.Oprema.Proizvodac.Naziv
+            </td>
+            <td>
+                @item.Oprema.Naziv
+            </td>
+            <td>
+                @item.Oprema.Cijena
+            </td>
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.OpremaId">Izbaci</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>Total
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>

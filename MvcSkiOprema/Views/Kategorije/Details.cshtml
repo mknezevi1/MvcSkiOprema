@@ -1,0 +1,22 @@
+﻿@model MvcSkiOprema.Models.Kategorija
+
+@{
+    ViewBag.Title = "Detalji kategorije";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Kategorija</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Ažuriraj", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Povratak", "Index")
+</p>

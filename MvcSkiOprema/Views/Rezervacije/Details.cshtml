@@ -1,0 +1,64 @@
+﻿@model MvcSkiOprema.Models.Rezervacija
+
+@{
+    ViewBag.Title = "Detalji rezervacije";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Rezervacija</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DatumOd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DatumOd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DatumDo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DatumDo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Odobreno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Odobreno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Napomena)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Napomena)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UkupnaCijena)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UkupnaCijena)
+    </div>
+
+    <b>Oprema</b>
+    <br />
+    @foreach (var stavka in Model.StavkaRezervacije)
+    {
+        <span>@stavka.Oprema.Id @stavka.Oprema.Proizvodac.Naziv @stavka.Oprema.Naziv</span><br />
+    }
+</fieldset>
+<p>
+    @Html.ActionLink("Ažuriranje", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Povratak", "Index")
+</p>

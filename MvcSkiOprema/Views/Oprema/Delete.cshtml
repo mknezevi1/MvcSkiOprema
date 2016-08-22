@@ -1,0 +1,81 @@
+﻿@model MvcSkiOprema.Models.Oprema
+
+@{
+    ViewBag.Title = "Brisanje opreme";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Jeste li sigurni da želite pobrisati ovu opremu?</h3>
+<fieldset>
+    <legend>Oprema</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Naziv)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Opis)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Opis)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cijena)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cijena)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Godina)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Godina)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Kategorija.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Kategorija.Naziv)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Dostupno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Dostupno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Slika)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Slika)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Proizvodac.Naziv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Proizvodac.Naziv)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Velicina)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Velicina)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Pobriši" /> |
+        @Html.ActionLink("Povratak", "Index")
+    </p>
+}

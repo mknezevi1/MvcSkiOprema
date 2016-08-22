@@ -1,0 +1,108 @@
+﻿@model MvcSkiOprema.Models.Oprema
+
+@{
+    ViewBag.Title = "Ažuriranje opreme";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Oprema</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Naziv)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Naziv)
+            @Html.ValidationMessageFor(model => model.Naziv)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Opis)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Opis)
+            @Html.ValidationMessageFor(model => model.Opis)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Cijena)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Cijena)
+            @Html.ValidationMessageFor(model => model.Cijena)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Godina)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Godina)
+            @Html.ValidationMessageFor(model => model.Godina)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KategorijaId, "Kategorija")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("KategorijaId", String.Empty)
+            @Html.ValidationMessageFor(model => model.KategorijaId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Dostupno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Dostupno)
+            @Html.ValidationMessageFor(model => model.Dostupno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Slika)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Slika, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Slika)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProizvodacId, "Proizvodac")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProizvodacId", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProizvodacId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Velicina)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Velicina)
+            @Html.ValidationMessageFor(model => model.Velicina)
+        </div>
+
+        <p>
+            <input type="submit" value="Spremi" />
+        </p>
+    </fieldset>
+}
+
+@using (Html.BeginForm("Upload", "Oprema", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    @Html.Hidden("id", @Model.Id)
+    <input type="file" name="file" />
+    <input type="submit" name="Submit" id="Submit" value="Spremi sliku" />
+}
+
+<div>
+    @Html.ActionLink("Povratak", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
